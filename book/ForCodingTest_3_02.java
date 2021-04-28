@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class BookForCodingTest_3_02 {
+public class ForCodingTest_3_02 {
 
 	public static void main(String[] args) {
 
