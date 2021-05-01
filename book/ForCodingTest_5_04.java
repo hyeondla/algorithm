@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class ForCodingTest_5_0304 {
+public class ForCodingTest_5_04 {
 
 	public static int num;
 
