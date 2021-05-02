@@ -111,6 +111,24 @@ min_value = Math.min(a, b);
 
 <br>
 
+> 집합자료형 **HashSet**
+
+```java
+HashSet<Integer> s = new HashSet<>();
+
+s.add(data); // 값 추가
+s.remove(data); // 값 삭제
+s.clear(); // 모든 값 삭제
+System.out.println(s.contains(data)); // 값 검색 → true/false 반환
+System.out.println(s.size()); // 크기
+```
+
+순서를 유지하지 않는 데이터의 집합
+
+데이터 중복 제거
+
+<br>
+
 > 스택 Stack
 
 ```java
