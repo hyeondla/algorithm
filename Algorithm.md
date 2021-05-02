@@ -291,7 +291,7 @@ public class MAin {
 
 스택 자료구조에 기초  → 재귀 함수 이용
 
-시간복잡도 : O(N)
+시간복잡도 : *O(N)*
 
 <br>
 
@@ -362,7 +362,7 @@ public class MAin {
 
 큐 자료구조에 기초 → 큐 이용
 
-시간복잡도 :  O(N), 일반적인 경우 DFS보다 빠름
+시간복잡도 :  *O(N)*, 일반적인 경우 DFS보다 빠름
 
 <br>
 
@@ -385,7 +385,7 @@ for(int i = 0; i < arr.length; i++){
 
 가장 작은 데이터를 선택해 맨 앞에 있는 데이터와 바꾸기 반복
 
-시간복잡도 : O(N²)
+시간복잡도 : *O(N²)*
 
 <br>
 
@@ -413,7 +413,7 @@ for(int i = 1; i < n; i++){
 
 → 적절한 위치를 찾은 뒤 삽입
 
-시간복잡도 : O(N)
+시간복잡도 : *O(N)*
 
 <br>
 
@@ -484,7 +484,7 @@ public class Main {
 
 종료 조건 : 현재 리스트의 데이터 개수가 1개일 때
 
-시간복잡도 : O(NlogN), 최악(이미 데이터가 정렬되어 있는)의 경우 O(N²)
+시간복잡도 : *O(NlogN)*, 최악(이미 데이터가 정렬되어 있는)의 경우 *O(N²)*
 
 <br>
 
@@ -521,7 +521,105 @@ public class Main {
 
 데이터가 많이 중복되어 있는 경우
 
-시간복잡도 : O(N + K)
+시간복잡도 : *O(N + K)*
+
+<br>
+
+> 순차 탐색
+
+```java
+public class Main {
+    public static int sequantialSearch(int n, String target, String[] arr) {
+        for (int i = 0; i < n; i++) {
+            if (arr[i].equals(target)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    public static void main(String[] args) { }
+}
+```
+
+앞에서부터 데이터를 차례대로 확인
+
+시간복잡도 : *O(N)*
+
+<br>
+
+> 이진 탐색
+
+```java
+public class Main {
+    // 재귀 함수
+    public static int binarySearch(int[] arr, int target, int start, int end) {
+        if (start > end) return -1;
+        
+        int mid = (start + end) / 2;
+        if (arr[mid] == target) {
+            return mid;
+        } else if (arr[mid] > target) { // 중간점 값보다 찾는 값이 작을 경우
+            return binarySearch(arr, target, start, mid - 1);
+        } else { // 중간점 값보다 찾는 값이 클 경우
+            return binarySearch(arr, target, mid + 1, end);
+        }
+    }
+    
+    public static void main(String[] args) { }
+}
+```
+
+```java
+public class Main {
+    //반복문
+    public static int binarySearch(int[] arr, int target, int start, int end) {
+        while (start <= end) {
+            int mid = (start + end) / 2;
+            if (arr[mid] == target) {
+                return mid;
+            } else if (arr[mid] > target) { // 중간점 값보다 찾는 값이 작을 경우
+                end = mid - 1;
+            } else { // 중간점 값보다 찾는 값이 클 경우
+                start = mid + 1;
+            }
+        }
+        return -1;
+    }
+    
+    public static void main(String[] args) { }
+}
+```
+
+1. 시작점과 끝점 사이에 중간점을 정함
+
+   소수점 이하 버림
+
+2. 중간점의 데이터와 찾으려는 데이터 비교
+
+   → 시작점이나 끝점을 옮김
+
+3. 새로운 중간점을 정해 데이터 비교
+
+4. 반복
+
+배열 내부 데이터가 정렬되어 있어야 사용 가능
+
+찾으려는 데이터와 중간점 위치에 있는 데이터를 반복 비교
+
+재귀함수 / 반복문 으로 구현
+
+시간복잡도 : *O(logN)* 
+
+<br>
+
+> 이진 탐색 트리
+
+1. 부모 노드보다 왼쪽 자식 노드가 작음
+
+2. 부모 노드보다 오른쪽 자식 노드가 큼
+
+입력 데이터가 많거나 탐색 범위가 매우 넓은 경우
 
 <br>
 
