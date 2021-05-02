@@ -11,7 +11,8 @@ public class Main {
         int scan = sc.nextInt(); //숫자 입력 받기
         
         sc.nextLine(); //버퍼 비우기
-        String str = sc.nextLine(); //문자열 입력 받기
+        Strint str = sc.next(); //문자열 입력 받기
+        String str = sc.nextLine(); //한 줄 입력 받기
         //배열에 문자(공백구분) 받기
         String[] move = sc.nextLine().split(" "); 
         
@@ -40,10 +41,64 @@ int y = str.charAt(1) - '0'; //문자열 숫자 → 숫자
 > 배열 정렬
 
 ```java
-Arrays.sort(arr);
+Interger[] arr = new Integer[배열크기]; 
+Arrays.sort(arr); //오름차순
+Arrays.sort(arr, Collections.reverseOrder()); //내림차순
 ```
 
-작은 수 → 큰 수 
+<br>
+
+> **Comparable** 인터페이스
+
+```java
+import java.util.*;
+
+class Student implements Comparable<Student> {
+    private String name;
+    private int score;
+    
+    public Student(String name, int score){
+        this.name = name;
+        this.score = score;
+    }
+    
+    public String getName(){
+        return this.name;
+    }
+    public int getScore(){
+        return this.score;
+    }
+    
+    @Override
+    // 해당 객체와 전달된 객체의 순서 비교
+    public int compareTo(Student other){
+    	if(this.score < other.score){
+            return -1;
+        }	   
+        return 1;
+    }
+    
+}
+
+public class Main {
+    public static void main(String[] args){
+        
+        List<Student> students = new ArrayList<>();
+        
+        students.add(new Student("name", score));
+        students.add(new Student("name", score));
+        students.add(new Student("name", score));
+        
+        Collections.sort(students);
+        
+        for(int i = 0; i < students.size(); i++){
+            System.out.println(students.get(i).getName() + " " + students.get(i).getScore());
+        }
+    }
+}
+```
+
+기본 오름차순 정렬
 
 <br>
 
@@ -308,6 +363,165 @@ public class MAin {
 큐 자료구조에 기초 → 큐 이용
 
 시간복잡도 :  O(N), 일반적인 경우 DFS보다 빠름
+
+<br>
+
+> 선택 정렬
+
+```java
+for(int i = 0; i < arr.length; i++){
+    int min_index = i;
+    for(int j = i + 1; j < arr.length; j++){
+        if(arr[min_index] > arr[j]){
+            min_index = j;
+        }
+    }
+    
+    int tmp = arr[i];
+    arr[i] = arr[min_index];
+    arr[min_index] = tmp;
+}
+```
+
+가장 작은 데이터를 선택해 맨 앞에 있는 데이터와 바꾸기 반복
+
+시간복잡도 : O(N²)
+
+<br>
+
+> 삽입 정렬
+
+```java
+for(int i = 1; i < n; i++){
+	for(int j = 1; j > 0; j--){
+		if(arr[j] < arr[j - 1]){
+			int tmp = arr[j];
+			arr[j] = arr[j - 1];
+			arr[j - 1] = tmp;
+		} else {
+			break;
+		}
+	}
+}
+```
+
+데이터가 거의 정렬되어 있을 때 효율적
+
+두번째 데이터부터 판단
+
+그 앞의 데이터는 이미 정렬되어 있음
+
+→ 적절한 위치를 찾은 뒤 삽입
+
+시간복잡도 : O(N)
+
+<br>
+
+> 퀵 정렬
+
+```java
+public class Main {
+	
+    public static void quickSort(int[] arr, int start, int end){
+    	
+        if (start >= end) return; //종료 조건
+        
+        int pivot = start; //첫번째 데이터 피벗으로 설정
+        int left = start + 1;
+        int right = end;
+        
+        while(left <= right){
+            
+            //피벗보다 큰 데이터 위치 찾기
+            while(left <= end && arr[left] <= arr[pivot]) left++;
+            //피벗보다 작은 데이터 위치 찾기
+            while(right > start && arr[right] >= arr[pivot]) right--;
+			
+            if(left > right) { //엇갈림 -> 작은 데이터와 피벗 위치 바꿈
+                int tmp = arr[pivot];
+                arr[pivot] = arr[right];
+                arr[right] = tmp;
+            } else { //작은 데이터와 큰 데이터 위치 바꿈
+                int tmp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = tmp;
+            }
+            
+        }
+        //피벗 왼쪽에는 피벗보다 작은 데이터, 오른쪽에는 피벗보다 큰 데이터로 분할 완료
+		//=> 왼쪽과 오른쪽 각각 퀵소트
+        quickSort(arr, start, right - 1);
+        quickSort(arr, right + 1, end);
+    }
+    
+    public static void main(String[] args) {
+        quickSort(arr, 0, arr.length - 1);
+    }
+}
+```
+
+1. 첫번째 데이터를 피벗으로 설정
+
+2. 왼쪽에서부터 피벗보다 큰 데이터 선택,
+
+   오른쪽에서부터 피벗보다 작은 데이터 선택,
+
+   두 데이터의 위치 바꿈
+
+3. 2 반복
+
+   → 왼쪽에서부터 찾는 값과 오른쪽에서부터 찾는 값의 위치가 엇갈림
+
+4. 작은 데이터와 피벗의 위치 바꿈
+
+   → 피벗의 왼쪽에는 피벗보다 작은 데이터, 오른쪽에는 큰 데이터 위치 
+
+5. 왼쪽 리스트 1~4 반복
+
+6. 오른쪽 리스트 1~4 반복
+
+재귀함수로 구현
+
+종료 조건 : 현재 리스트의 데이터 개수가 1개일 때
+
+시간복잡도 : O(NlogN), 최악(이미 데이터가 정렬되어 있는)의 경우 O(N²)
+
+<br>
+
+> 계수 정렬
+
+```java
+public class Main {
+	
+    public static final int MAX_VALUE = 배열크기;
+    
+    public static void main(String[] args) {
+        
+    	int[] cnt = new int[MAX_VALUE + 1];
+        
+        for (int i = 0; i < n; i++) {
+  	      cnt[arr[i]]++;
+	    }
+        
+    }
+}
+```
+
+1. 모든 범위를 담을 수 있는 크기의 배열 선언, 0으로 초기화
+
+2. 데이터 하나씩 확인 
+
+   → 데이터 값과 동일한 인덱스 데이터 1씩 증가
+
+3. 첫번째 데이터부터 하나씩 그 값만큼 인덱스 출력
+
+데이터의 크기 범위가 제한되어 정수 형태로 표현할 수 있을 때만 사용 가능
+
+일반적으로 가장 큰 데이터와 가장 작은 데이터의 차이가 1,000,000 이하일 때 효과적
+
+데이터가 많이 중복되어 있는 경우
+
+시간복잡도 : O(N + K)
 
 <br>
 
