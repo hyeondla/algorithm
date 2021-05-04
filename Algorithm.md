@@ -38,12 +38,14 @@ int y = str.charAt(1) - '0'; //문자열 숫자 → 숫자
 
 <br>
 
-> 배열 정렬
+> 배열
 
 ```java
 Interger[] arr = new Integer[배열크기]; 
-Arrays.sort(arr); //오름차순
-Arrays.sort(arr, Collections.reverseOrder()); //내림차순
+Arrays.sort(arr); //오름차순 정렬
+Arrays.sort(arr, Collections.reverseOrder()); //내림차순 정렬
+
+Arrays.fill(arr, data); 
 ```
 
 <br>
