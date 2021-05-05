@@ -934,11 +934,7 @@ public class Main {
         // 최단 거리 테이블 초기화(무한)
         for (int i = 0; i < 501; i++) {
             Arrays.fill(graph[i], INF);
-        }
-		 for (int a = 1; a <= n; a++) {
-            for (int b = 1; b <= n; b++) {
-                if (a == b) graph[a][b] = 0;
-            }
+            graph[i][i] = 0;
         }
 
         // 간선 정보 입력
@@ -967,6 +963,8 @@ public class Main {
 
 2차원 리스트에 최단 거리 저장
 
+노드의 개수가 적은 경우 이용
+
 다이나믹 프로그래밍
 $$
 \text{점화식}: D_{ab} = min(D_{ab}, D_{ak}+D_{kb})
@@ -977,5 +975,281 @@ $$
 
 <br>
 
-  
+> 서로소 집합
+
+```java
+import java.util.*;
+
+public class Main {
+
+    // V 노드 개수, E 연산 개수
+    public static int v, e;
+    public static int[] parent = new int[100001]; // 부모 테이블
+    
+    // 특정 원소가 속한 집합 찾기
+    public static int findParent(int x) {
+        // 루트 노드를 찾을 때까지 재귀 호출
+        if (x == parent[x]) {
+            return x;
+        }
+        return parent[x] = findParent(parent[x]);
+    }
+    
+    // 집합 합치기
+    public static void unionParent(int a, int b) {
+        a = findParent(a);
+        b = findParent(b);
+        // 번호가 더 작은 원소가 부모 노드
+        if (a < b) {
+            parent[b] = a;
+        } else {
+            parent[a] = b;
+        }
+    }
+    
+    public static void main(String[] args) {
+        
+        // 부모를 자기 자신으로 초기화
+        for (int i = 1; i <= v; i++) {
+            parent[i] = i;
+        }
+
+        // Union 연산
+        for (int i = 0; i < e; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            unionParent(a, b);
+        }
+
+        // 각 원소가 속한 집합 출력
+        for (int i = 1; i <= v; i++) {
+            System.out.print(findParent(i) + " ");
+        }
+        System.out.println();
+
+        // 부모 테이블 출력
+        for (int i = 1; i <= v; i++) {
+            System.out.print(parent[i] + " ");
+        }
+        System.out.println();
+    }
+    
+}
+```
+
+트리 자료구조로 집합 표현
+
+1. union 연산 확인 → 서로 연결된 두 노드 A, B 확인
+
+   1. A와 B의 루트 노드 A', B' 찾기
+
+   2. A'를 B'의 부모노드로 설정 (B'가 A'를 가리키도록 함)
+
+      → 번호가 더 작은 원소가 부모 노드가 되도록 구현
+
+2. 모든 union 연산을 처리할 때까지 1 반복
+
+시간복잡도 : *O(V+M)* 
+
+무방향 그래프 내에서 사이클 판별
+
+1. 각 간선을 확인하며 두 노드의 루트 노드를 확인
+   1. 루트 노드가 서로 다르면 union 연산
+   2. 루트 노드가 같으면 사이클 有
+2.  그래프의 모든 간선에 대해 1 반복
+
+```java
+boolean cycle = false;
+
+//루트 노드가 같으면 사이클
+if(findParent(a)==findParent(b)) {
+	cycle = true;
+} else {
+    //루트 노드가 다르면 union
+	unionParent(a, b);
+}
+```
+
+<br>
+
+> 크루스칼 알고리즘
+
+```java
+import java.util.*;
+
+class Edge implements Comparable<Edge> {
+
+    private int distance;
+    private int nodeA;
+    private int nodeB;
+
+    public Edge(int distance, int nodeA, int nodeB) {
+        this.distance = distance;
+        this.nodeA = nodeA;
+        this.nodeB = nodeB;
+    }
+
+    public int getDistance() {
+        return this.distance;
+    }
+    public int getNodeA() {
+        return this.nodeA;
+    }
+    public int getNodeB() {
+        return this.nodeB;
+    }
+
+    // 거리가 짧은 것이 높은 우선순위
+    @Override
+    public int compareTo(Edge other) {
+        if (this.distance < other.distance) {
+            return -1;
+        }
+        return 1;
+    }
+}
+
+public class Main {
+    public static int v, e;
+    public static int[] parent = new int[100001]; 
+    public static ArrayList<Edge> edges = new ArrayList<>();
+    public static int result = 0;
+    
+    public static int findParent(int x) {
+        if (x == parent[x]) return x;
+        return parent[x] = findParent(parent[x]);
+    }
+    
+    public static void unionParent(int a, int b) {
+        a = findParent(a);
+        b = findParent(b);
+        if (a < b) parent[b] = a;
+        else parent[a] = b;
+    }
+    
+    public static void main(String[] args) {
+        
+        for (int i = 1; i <= v; i++) {
+            parent[i] = i;
+        }
+        
+        edges.add(new Edge(cost, a, b));
+                  ...
+                      
+        // 비용순 정렬
+        Collections.sort(edges);
+        
+        // 간선 하나씩 확인
+        for (int i = 0; i < edges.size(); i++) {
+            int cost = edges.get(i).getDistance();
+            int a = edges.get(i).getNodeA();
+            int b = edges.get(i).getNodeB();
+            // 사이클이 발생하지 않는 경우
+            if (findParent(a) != findParent(b)) {
+                unionParent(a, b); // union
+                result += cost;
+            }
+        }
+        
+    }
+}
+```
+
+신장 트리 : 모든 노드가 연결되면서 사이클이 존재하지 않는 부분 그래프
+
+신장 트리 중에서 최소 비용으로 만들 수 있는 신장 트리를 찾는 알고리즘
+
+가장 거리가 짧은 간선부터 차례대로 집합에 추가, 사이클 발생 간선 제외
+
+1. 간선 데이터 오름차순 정렬
+2. 사이클 발생시키는지 간선을 하나씩 확인
+   1. 사이클 X → 최소 신장 트리에 포함 (union)
+   2. 사이클 → 최소 신장 트리에 미포함
+3. 모든 간선에 대해 2 반복
+
+신장 트리에 포함되는 간선의 개수 = 노드 개수 - 1
+
+시간복잡도 : *O(ElogE)*
+
+<br>
+
+> 위상 정렬
+
+```java
+import java.util.*;
+
+public class Main {
+    // V 노드 개수, E 간선 개수
+	public static int v, e;
+    // 모든 노드에 대한 진입차수
+	public static int[] indegree = new int[100001];
+    // 각 노드에 연결된 간선 정보
+	public static ArrayList<ArrayList<Integer>> graph = new ArrayList<ArrayList<Integer>>();
+    
+    public static void topologySort() {
+		
+        ArrayList<Integer> result = new ArrayList<>(); // 큐에서 빠져나간 노드 번호 저장
+        Queue<Integer> q = new LinkedList<>(); 
+
+        // 진입차수가 0인 노드를 큐에 삽입
+        for (int i = 1; i <= v; i++) {
+            if (indegree[i] == 0) {
+                q.offer(i);
+            }
+        }
+
+        while (!q.isEmpty()) {
+            int now = q.poll();
+            result.add(now);
+            for (int i = 0; i < graph.get(now).size(); i++) {
+            	// 해당 원소와 연결된 노드들의 진입차수 -1 
+                indegree[graph.get(now).get(i)]--;
+                // 진입차수가 0이 되는 노드를 큐에 삽입
+                if (indegree[graph.get(now).get(i)] == 0) {
+                    q.offer(graph.get(now).get(i));
+                }
+            }
+        }
+
+        // 위상 정렬 수행 결과
+        for (int i = 0; i < result.size(); i++) {
+            System.out.print(result.get(i) + " ");
+        }
+        
+    }
+    
+    public static void main(String[] args) {
+    
+        // 그래프 초기화
+        for (int i = 0; i <= v; i++) {
+            graph.add(new ArrayList<Integer>());
+        }
+        
+        // 간선 정보 입력
+        graph.get(a).get(b); // a → b 노드 연결
+        indegree[b]++; // b 노드 진입 차수 +1
+        	...
+                
+        topologySort();
+        
+    }
+}
+```
+
+순서가 정해져 있는 일련의 작업을 차례대로 수행할 때 사용
+
+방향 그래프의 모든 노드를 방향성에 거스르지 않도록 순서대로 나열
+
+진입차수 : 특정한 노드로 들어오는 간선의 개수
+
+1. 진입차수가 0인 노드를 큐에 삽입
+2. 큐가 빌 때까지 다음 반복
+   1. 큐에서 원소를 꺼내 해당 노드에서 출발하는 간선을 그래프에서 제거
+   2. 새로 진입차수가 0이 된 노드를 큐에 삽입
+
+큐에서 빠져나간 노드 순서대로 출력
+
+시간복잡도 : *O(V + E)*
+
+<br>
 
