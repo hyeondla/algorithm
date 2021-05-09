@@ -51,6 +51,17 @@ Arrays.fill(arr, data); //일차원 배열 초기화
 for(int i=0; i<n; i++){
     Arrays.fill(arr[i], data); 
 }
+//-------------------------------------------------
+import java.util.ArrayList;
+
+//인스턴스 생성 -> 자료형 생략시 형변환 필요
+ArrayList<Integer> list = new ArrayList<Integer>();
+ArrayList<String> list = new ArrayList<String>();
+
+list.add(data); //값 입력, 추가
+System.out.println(list.get(num)); //n번째 데이터 출력
+System.out.println(list.size());//현재 배열 크기
+
 ```
 
 <br>
