@@ -39,6 +39,20 @@ int y = str.charAt(1) - '0'; //문자열 숫자 → 숫자
 
 <br>
 
+> 진수 변환
+
+```java
+Integer.toBinaryString(num); //10진수 → 2진수
+Integer.toOctalString(num); //10진수 → 8진수
+Integer.toHexString(num); //10진수 → 16진수
+
+Integer.parseInt(num, 2); //2진수 → 10진수
+Integer.parseInt(num, 8); //8진수 → 10진수
+Integer.parseInt(num, 16); //16진수 → 10진수
+```
+
+<br>
+
 > 배열
 
 ```java

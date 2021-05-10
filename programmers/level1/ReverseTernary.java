@@ -1,3 +1,4 @@
+// 3진법 뒤집기
 class Solution {
 	public int solution(int n) {
 		int answer = 0;
