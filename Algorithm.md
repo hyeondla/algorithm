@@ -146,6 +146,35 @@ System.out.println(s.size()); // 크기
 
 데이터 중복 제거
 
+> **Iterator** 인터페이스
+
+```java
+public interface Iterator {
+    //읽어 올 요소가 남아있는지 확인
+	boolean hasNext(); //있으면 true, 없으면 false 리턴
+    
+    //다음 요소를 리턴
+    Object next();
+    
+    //next()로 읽어온 요소 삭제
+    void remove();
+}
+//=================================================
+Iterator<Integer> iter = list.iterator();
+Iterator<String> iter = list.iterator();
+while(iter.hasNext()){
+    System.out.println(iter.next());
+}
+```
+
+컬렉션 프레임워크에서 저장된 요소를 읽어오는 방법을 표준화
+
+자동으로 Index 관리
+
+List, Set
+
+
+
 <br>
 
 > 스택 Stack
