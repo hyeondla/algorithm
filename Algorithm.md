@@ -30,6 +30,22 @@ char c2 = str.charAt(1); //두번째 글자
 ```
 <br>
 
+> 문자열 
+
+```java
+//문자열 자르기
+str.substring(start); //start ~ 끝
+str.substring(start,end); //start ~ (end-1)
+
+//특정문자 위치 찾기
+//발견되는 인덱스 리턴, 없을시 -1 리턴
+str.indexOf("특정문자"); //앞에서부터 처음 발견
+str.indexOf("특정문자", 시작위치); //시작위치부터 처음 발견
+str.lastIndexOf("특정문자"); //뒤에서부터 처음 발견
+```
+
+<br>
+
 > int 값으로 변환
 
 ```java
@@ -200,6 +216,8 @@ public class Main {
 	public static void main(String[] args){
         
         Stack<Integer> s = new Stack<>();
+        Stack<Character> stack = new Stack<>();
+        Stack<String> s = new Stack<>();
         
         s.push(data); //데이터 삽입
         s.pop(); //데이터 삭제
