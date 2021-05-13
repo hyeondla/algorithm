@@ -77,6 +77,7 @@ Arrays.sort(arr); //오름차순 정렬
 Arrays.sort(arr, Collections.reverseOrder()); //내림차순 정렬
 
 Arrays.fill(arr, data); //일차원 배열 초기화
+System.out.println(Arrays.toString(arr)); //문자열로 리턴
 //이차원 배열 초기화
 for(int i=0; i<n; i++){
     Arrays.fill(arr[i], data); 
@@ -91,6 +92,15 @@ ArrayList<String> list = new ArrayList<String>();
 list.add(data); //값 입력, 추가
 System.out.println(list.get(num)); //n번째 데이터 출력
 System.out.println(list.size());//현재 배열 크기
+
+//=================================================
+
+//배열 복사 - 기본형
+int[] newArr = Arrays.copyOf(arr, arr.length); //[0]~[length-1] 복사
+int[] newArr = arr.clone();
+
+//배열 복사 - 참조자료형
+//각 요소 값을 clone() 생성 복사 후 배열에 추가
 
 ```
 
