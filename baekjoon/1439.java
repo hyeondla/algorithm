@@ -1,8 +1,7 @@
-package chap11;
-
+// 뒤집기
 import java.util.*;
 
-public class Test_3 {
+public class Main {
 
 	public static void main(String[] args) {
 
@@ -10,28 +9,28 @@ public class Test_3 {
 
 		String str = sc.next();
 
-		int cnt_0 = 0;
-		int cnt_1 = 0;
+		int cntZero = 0; 
+		int cntOne = 0;
 
-		if (str.charAt(0) == '0') {
-			cnt_0++;
+		if (str.charAt(0) == '1') {
+			cntZero++;
 		} else {
-			cnt_1++;
+			cntOne++;
 		}
 
 		for (int i = 0; i < str.length() - 1; i++) {
 
 			if (str.charAt(i) != str.charAt(i + 1)) {
 				if (str.charAt(i + 1) == '1') {
-					cnt_0++;
+					cntZero++;
 				} else {
-					cnt_1++;
+					cntOne++;
 				}
 			}
 
 		}
 
-		System.out.println(Math.min(cnt_0, cnt_1));
+		System.out.println(Math.min(cntZero, cntOne));
 
 	}
 

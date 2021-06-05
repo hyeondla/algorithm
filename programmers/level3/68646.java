@@ -1,4 +1,4 @@
-//풍선 터트리기
+// 풍선 터트리기
 class Solution {
 
 	public int solution(int[] a) {

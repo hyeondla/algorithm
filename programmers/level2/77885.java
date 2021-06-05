@@ -1,4 +1,4 @@
-//두개 이하로 다른 비트
+// 두개 이하로 다른 비트
 class Solution {
     public long[] solution(long[] numbers) {
         
