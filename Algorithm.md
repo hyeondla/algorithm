@@ -106,6 +106,35 @@ int[] newArr = arr.clone();
 
 <br>
 
+> List
+
+```java
+List<Integer> List = new ArrayList<Integer>();
+list.add(데이터);
+list.add(인덱스, 데이터); // 인덱스에 데이터 추가, 기존 데이터는 뒤로 밀려남
+list.addAll(리스트);
+list.set(인덱스, 데이터); // 인덱스에 데이터 덮어씀
+list.remove(인덱스);
+list.remove(list.indexOf(데이터));
+System.out.println(list.isEmpty());
+System.out.println(list.size());
+System.out.println(list.get(인덱스)); // 인덱스에 저장된 데이터 리턴
+System.out.println(list.indexOf(데이터)); // 데이터가 위치한 인덱스 리턴
+System.out.println(list.lastIndexOf(데이터)); // 뒤에서부터 탐색
+
+List subList = list.subList(시작인덱스, 끝인덱스); // 시작 ~ 끝-1 추출
+Collections.sort(list); // 정렬, 같은 타입 요소만 가능
+Collections.shuffle(list); // 무작위 섞기, 타입 무관
+
+// 배열 → 리스트 변환
+List nameList = Arrays.atList(배열);
+List nameList = Arrays.atList(데이터1, 데이터2, ...);
+```
+
+저장 데이터 순서 유지, 저장 시점에서 자동으로 인덱스가 부여됨
+
+<br>
+
 > **Comparable** 인터페이스
 
 ```java
@@ -170,21 +199,29 @@ min_value = Math.min(a, b);
 
 <br>
 
-> 집합자료형 **HashSet**
+> 집합자료형 **Set**
 
 ```java
 HashSet<Integer> s = new HashSet<>();
+TreeSet<Integer> s = new TreeSet<>(); 
 
 s.add(data); // 값 추가
 s.remove(data); // 값 삭제
 s.clear(); // 모든 값 삭제
+System.out.println(s.isEmpty()); // 비어있는지 확인
 System.out.println(s.contains(data)); // 값 검색 → true/false 반환
 System.out.println(s.size()); // 크기
 ```
 
-순서를 유지하지 않는 데이터의 집합
+순서를 유지하지 않는 데이터의 집합, 인덱스 사용 X
 
 데이터 중복 제거
+
+Set / List 계열 객체 복사 가능
+
+TreeSet : 같은 타입 데이터, 오름차순 정렬
+
+<br>
 
 > **Iterator** 인터페이스
 
@@ -201,7 +238,8 @@ public interface Iterator {
 }
 //=================================================
 Iterator<Integer> iter = list.iterator();
-Iterator<String> iter = list.iterator();
+Iterator<Integer> iter = set.iterator();
+
 while(iter.hasNext()){
     System.out.println(iter.next());
 }
@@ -212,8 +250,6 @@ while(iter.hasNext()){
 자동으로 Index 관리
 
 List, Set
-
-
 
 <br>
 
