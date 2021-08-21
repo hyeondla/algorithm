@@ -22,6 +22,33 @@ public class Main {
 ```
 <br>
 
+> BufferedReader / BufferedWriter
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+	public static void main(String[] args) throws IOException { // 예외처리 필수
+     
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        String s = bf.readLine(); // 문자열
+        int i = Integer.parseInt(bf.readLine()); // 정수 → 형변환 필요 
+        
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.in));
+        bw.write(s+"\n");
+        bw.fluse();
+        bw.close();
+        
+	}
+}
+```
+
+Scanner보다 빠른 입출력
+
+<br>
+
 > 문자열에서 문자 하나 저장하기
 
 ```java
