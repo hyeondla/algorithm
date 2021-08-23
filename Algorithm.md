@@ -14,8 +14,7 @@ public class Main {
         Strint str = sc.next(); //문자열 입력 받기
         String str = sc.nextLine(); //한 줄 입력 받기
         //배열에 문자(공백구분) 받기
-        String[] move = sc.nextLine().split(" "); 
-        
+        String[] move = sc.nextLine().split(" ");    
         
 	}
 }
@@ -28,14 +27,25 @@ public class Main {
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
 	public static void main(String[] args) throws IOException { // 예외처리 필수
-     
+     	// 입력
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         String s = bf.readLine(); // 문자열
         int i = Integer.parseInt(bf.readLine()); // 정수 → 형변환 필요 
+        // 입력 문자열 쪼개기
+        StringTokenizer st = new StringTokenizer(bf.readLine());
+        while(st.hasMoreTokens()) {
+        	int i = Integer.parseInt(st.nextToken()); // 공백 기준 잘라냄 → token
+        }
+        StringTokenizer st = new StringTokenizer(str,"-"); // 특정 기호 기준 잘라냄
+        StringTokenizer st = new StringTokenizer(str,"-="); // 여러 기호 → 각각 잘라냄
+        StringTokenizer st = new StringTokenizer(str,"-",true); // 기호 포함
+        System.out.println(st.countTokens()); // 남아있는 token 개수 반환
         
+        // 출력
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.in));
         bw.write(s+"\n");
         bw.fluse();
