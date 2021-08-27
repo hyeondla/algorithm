@@ -102,6 +102,11 @@ Integer.toHexString(num); //10진수 → 16진수
 Integer.parseInt(num, 2); //2진수 → 10진수
 Integer.parseInt(num, 8); //8진수 → 10진수
 Integer.parseInt(num, 16); //16진수 → 10진수
+
+Integer.valueOf(num); // 문자열 10진수 → 10진수
+Integer.valueOf(num, 2); // 문자열 2진수 → 10진수
+Integer.valueOf(num, 8); // 문자열 8진수 → 10진수
+Integer.valueOf(num, 16); // 문자열 16진수 → 10진수
 ```
 
 <br>
