@@ -232,6 +232,23 @@ public class Main {
 
 <br>
 
+> **Comparator** 인터페이스
+
+```java
+Arrays.sort(arr, new Comparator<int[]>() {
+   public int compare(int[] o1, int[] o2) {
+       if(o1[1] == o2[1]) { // 1번 인덱스 값이 같을 경우 
+           return o1[0] - o2[0]; // 0번 인덱스 기준 오름차순 정렬
+       }
+       return o1[1] - o2[1]; // 1번 인덱스 기준 오름차순 정렬
+   } 
+});
+```
+
+
+
+<br>
+
 > 최대/최소값 찾기
 
 ```java
@@ -458,6 +475,11 @@ public class MAin {
         graph.get(노드).add(연결 노드);
         graph.get(노드).add(연결 노드);
         
+        // 정렬
+        for(int i=0; i<graph.size(); i++) {
+            Collections.sort(graph.get(i));
+        }
+        
    		dfs(시작 노드);
         
     }
@@ -521,13 +543,18 @@ public class MAin {
             graph.add(new ArrayList<Integer>());
         }
         
-        //노드 정보 저장
+        // 노드 정보 저장
         graph.get(노드).add(연결 노드);
         graph.get(노드).add(연결 노드);
         graph.get(노드).add(연결 노드);
         graph.get(노드).add(연결 노드);
         graph.get(노드).add(연결 노드);
         graph.get(노드).add(연결 노드);
+        
+        // 정렬
+        for(int i=0; i<graph.size(); i++) {
+            Collections.sort(graph.get(i));
+        }
         
    		bfs(시작 노드);
         
