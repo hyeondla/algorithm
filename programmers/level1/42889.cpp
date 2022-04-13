@@ -23,10 +23,10 @@ vector<int> solution(int N, vector<int> stages) {
     vector<pair<int,double>> fRates; // 스테이지당 실패율 저장
     for(int i=1; i<=N; i++) {
         if(player == 0) { // 도달한 유저가 없는 경우
-            fRates.push_back(vector<pair<int,double>>::value_type(i, 0.0));
+            fRates.push_back(make_pair(i, 0.0));
             continue;
         }
-        fRates.push_back(vector<pair<int, double>>::value_type(i,(double)pStages[i]/player));
+        fRates.push_back(make_pair(i,(double)pStages[i]/player));
         player -= pStages[i];
     }
     
