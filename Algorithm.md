@@ -185,7 +185,8 @@ import java.util.HashMap;
 HashMap<String, String> map = new HashMap();
 map.put("key", "value");
 map.get("key"); // value 반환
-map.containKey("key"); // True, False 반환
+map.getOrDefault("key", "defaultValue"); // key 존재하면 값 반환, 그렇지 않으면 디폴트 값 반환
+map.containsKey("key"); // True, False 반환
 map.remove("key"); // 삭제, value 반환
 map.size(); // 갯수 
 map.keySet(); // Set 자료형으로 모든 key 반환
