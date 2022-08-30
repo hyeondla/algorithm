@@ -25,31 +25,34 @@ public class Main {
 
 ```java
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
 public class Main {
 	public static void main(String[] args) throws IOException { // 예외처리 필수
-     	// 입력
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        String s = bf.readLine(); // 문자열
-        int i = Integer.parseInt(bf.readLine()); // 정수 → 형변환 필요 
-        // 입력 문자열 쪼개기
-        StringTokenizer st = new StringTokenizer(bf.readLine());
-        while(st.hasMoreTokens()) {
-        	int i = Integer.parseInt(st.nextToken()); // 공백 기준 잘라냄 → token
-        }
-        StringTokenizer st = new StringTokenizer(str,"-"); // 특정 기호 기준 잘라냄
-        StringTokenizer st = new StringTokenizer(str,"-="); // 여러 기호 → 각각 잘라냄
-        StringTokenizer st = new StringTokenizer(str,"-",true); // 기호 포함
-        System.out.println(st.countTokens()); // 남아있는 token 개수 반환
-        
-        // 출력
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.in));
-        bw.write(s+"\n");
-        bw.fluse();
-        bw.close();
+		// 입력
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		String s = bf.readLine(); // 문자열
+		int i = Integer.parseInt(bf.readLine()); // 정수 → 형변환 필요 
+		// 입력 문자열 쪼개기
+		StringTokenizer st = new StringTokenizer(bf.readLine());
+		StringTokenizer st = new StringTokenizer(str,"-"); // 특정 기호 기준 잘라냄
+		StringTokenizer st = new StringTokenizer(str,"-="); // 여러 기호 → 각각 잘라냄
+		StringTokenizer st = new StringTokenizer(str,"-",true); // 기호 포함
+		while(st.hasMoreTokens()) {
+			int i = Integer.parseInt(st.nextToken()); // 공백 기준 잘라냄 → token
+		}
+		System.out.println(st.countTokens()); // 남아있는 token 개수 반환
+		bf.close();
+
+		// 출력
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		bw.write(s+"\n");
+		bw.flush();
+		bw.close();
         
 	}
 }
