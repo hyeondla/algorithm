@@ -177,6 +177,29 @@ List nameList = Arrays.atList(데이터1, 데이터2, ...);
 
 <br>
 
+> Map
+
+```java
+import java.util.HashMap;
+
+HashMap<String, String> map = new HashMap();
+map.put("key", "value");
+map.get("key"); // value 반환
+map.containKey("key"); // True, False 반환
+map.remove("key"); // 삭제, value 반환
+map.size(); // 갯수 
+map.keySet(); // Set 자료형으로 모든 key 반환
+List<String> keyList = new ArrayList<>(map.keySet()); // List 자료형으로 모든 key 반환
+```
+
+HashMap 순서 X
+
+LinkedHashMap 순서 O
+
+TreeMap 오름차순
+
+<br>
+
 > **Comparable** 인터페이스
 
 ```java
