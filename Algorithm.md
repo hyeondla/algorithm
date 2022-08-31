@@ -94,6 +94,10 @@ char c2 = str.charAt(1); //두번째 글자
 str.substring(start); //start ~ 끝
 str.substring(start,end); //start ~ (end-1)
 
+// 포함 여부 확인
+str.contains("특정문자열"); // boolean 반환
+str.matches("정규표현식"); // boolean 반환
+
 //특정문자 위치 찾기
 //발견되는 인덱스 리턴, 없을시 -1 리턴
 str.indexOf("특정문자"); //앞에서부터 처음 발견
@@ -407,6 +411,70 @@ public class Main {
 Fitst In First Out
 
 언더플로우, 오버플로우 발생 가능
+
+<br>
+
+> Deque
+
+```java
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Iterator;
+
+// 생성
+Deque<String> dq = new ArrayDeque<>(); 
+Deque<String> dq = new LinkedBlockingDeque<>();
+Deque<String> dq = new ConcurrentLinkedDeque<>();
+Deque<String> dq = new LinkedList<>();
+
+dq.addFirst(str); // 맨 앞에 삽입, 용량 초과시 예외
+dq.push(); // == addFirst(), 용량 초과시 예외
+dq.addLast(str); // 맨 뒤에 삽입
+dq.add(str); // == addLast()
+dq.offerFirst(str); // 맨 앞에 삽입, boolean 리턴
+dq.offerLast(str); // 맨 뒤에 삽입, boolean 리턴
+
+dq.removeFirst(); // 맨 앞 반환하고 삭제, 비어있는 경우 예외
+dq.pop(); // == removeFirst
+dq.remove(); // == removeFirst()
+dq.element(); // == removeFirst()
+dq.removeLast(); // 맨 뒤 반환하고 삭제, 비어있는 경우 예외
+
+dq.pollFirst(); // 맨 앞 반환하고 삭제, 비어있는 경우 null 리턴
+dq.poll(); // == pollFirst()
+dq.pollLast(); // 맨 뒤 반환하고 삭제, 비어있는 경우 null 리턴
+
+dq.getFirst(); // 맨 앞 반환
+dq.getLast(); // 맨 뒤 반환
+dq.peekFirst(); // 맨 앞 반환, 비어있는 경우 null 리턴
+dq.peek(); // == peekFirst()
+dq.peekLast(); // 맨 뒤 반환, 비어있는 경우 null 리턴
+
+dq.removeFirstOccurrence(Object o); // 앞에서부터 탐색하여 o와 동일한 엘리먼트 제거
+dq.remove(Object o); // == removeFirstOccurrence
+dq.removeLastOccurrence(Object o); // 뒤에서부터 탐색하여 o와 동일한 엘리먼트 제거
+
+dq.addAll(Collection c); // 맨 뒤에 Collection 데이터 모두 삽입
+
+dq.contain(Object o); // 덱에 포함되어 있는지 확인
+
+dq.size(); // 엘리먼트 개수
+
+dq.iterator(); // 맨 앞부터 
+dq.descendingIterator(); // 맨 뒤부터
+
+// 순회
+for(String ele : dq) {
+	System.out.println(ele);
+}
+
+Iterator<String> iter = dq.iterator();
+while(iter.hasNext()) {
+	String ele = iterator.next();
+	System.out.println(ele);
+}
+
+```
 
 <br>
 
