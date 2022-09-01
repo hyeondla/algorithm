@@ -70,8 +70,10 @@ StringBuilder sb = new StringBuilder(str);
 sb.append(str);
 sb.insert(idx,str); // 인덱스에 문자열 삽입
 sb.delete(start,end); // 인덱스 start~end-1 삭제
-sb.setCharAt(); // 인덱스 문자 변경
+sb.setCharAt(idx,'c');  // 인덱스 문자 변경
+sb.replace(start,end,str); // start~end-1 문자열 대체
 sb.deleteCharAt(idx); // 인덱스 한 문자만 삭제
+sb.substring(start,end); // start~end-1을 String 인스턴스로 반환
 sb.setLength(len); // 현재 문자열보다 길면 공백 채움, 짧으면 삭제됨
 sb.trimToSize();
 sb.reverse(); 
@@ -457,7 +459,7 @@ dq.removeLastOccurrence(Object o); // 뒤에서부터 탐색하여 o와 동일�
 dq.addAll(Collection c); // 맨 뒤에 Collection 데이터 모두 삽입
 
 dq.contain(Object o); // 덱에 포함되어 있는지 확인
-
+dq.isEmpty(); // boolean 리턴
 dq.size(); // 엘리먼트 개수
 
 dq.iterator(); // 맨 앞부터 
