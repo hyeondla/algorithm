@@ -25,37 +25,59 @@ public class Main {
 
 ```java
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
 public class Main {
 	public static void main(String[] args) throws IOException { // 예외처리 필수
-     	// 입력
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        String s = bf.readLine(); // 문자열
-        int i = Integer.parseInt(bf.readLine()); // 정수 → 형변환 필요 
-        // 입력 문자열 쪼개기
-        StringTokenizer st = new StringTokenizer(bf.readLine());
-        while(st.hasMoreTokens()) {
-        	int i = Integer.parseInt(st.nextToken()); // 공백 기준 잘라냄 → token
-        }
-        StringTokenizer st = new StringTokenizer(str,"-"); // 특정 기호 기준 잘라냄
-        StringTokenizer st = new StringTokenizer(str,"-="); // 여러 기호 → 각각 잘라냄
-        StringTokenizer st = new StringTokenizer(str,"-",true); // 기호 포함
-        System.out.println(st.countTokens()); // 남아있는 token 개수 반환
-        
-        // 출력
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.in));
-        bw.write(s+"\n");
-        bw.fluse();
-        bw.close();
+		// 입력
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		String s = bf.readLine(); // 문자열
+		int i = Integer.parseInt(bf.readLine()); // 정수 → 형변환 필요 
+		// 입력 문자열 쪼개기
+		StringTokenizer st = new StringTokenizer(bf.readLine());
+		StringTokenizer st = new StringTokenizer(str,"-"); // 특정 기호 기준 잘라냄
+		StringTokenizer st = new StringTokenizer(str,"-="); // 여러 기호 → 각각 잘라냄
+		StringTokenizer st = new StringTokenizer(str,"-",true); // 기호 포함
+		while(st.hasMoreTokens()) {
+			int i = Integer.parseInt(st.nextToken()); // 공백 기준 잘라냄 → token
+		}
+		System.out.println(st.countTokens()); // 남아있는 token 개수 반환
+		bf.close();
+
+		// 출력
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		bw.write(s+"\n");
+		bw.flush();
+		bw.close();
         
 	}
 }
 ```
 
 Scanner보다 빠른 입출력
+
+<br>
+
+> StringBuilder
+
+```java
+StringBuilder sb = new StringBuilder();
+StringBuilder sb = new StringBuilder(str);
+sb.append(str);
+sb.insert(idx,str); // 인덱스에 문자열 삽입
+sb.delete(start,end); // 인덱스 start~end-1 삭제
+sb.setCharAt(idx,'c');  // 인덱스 문자 변경
+sb.replace(start,end,str); // start~end-1 문자열 대체
+sb.deleteCharAt(idx); // 인덱스 한 문자만 삭제
+sb.substring(start,end); // start~end-1을 String 인스턴스로 반환
+sb.setLength(len); // 현재 문자열보다 길면 공백 채움, 짧으면 삭제됨
+sb.trimToSize();
+sb.reverse(); 
+```
 
 <br>
 
@@ -73,6 +95,10 @@ char c2 = str.charAt(1); //두번째 글자
 //문자열 자르기
 str.substring(start); //start ~ 끝
 str.substring(start,end); //start ~ (end-1)
+
+// 포함 여부 확인
+str.contains("특정문자열"); // boolean 반환
+str.matches("정규표현식"); // boolean 반환
 
 //특정문자 위치 찾기
 //발견되는 인덱스 리턴, 없을시 -1 리턴
@@ -174,6 +200,30 @@ List nameList = Arrays.atList(데이터1, 데이터2, ...);
 ```
 
 저장 데이터 순서 유지, 저장 시점에서 자동으로 인덱스가 부여됨
+
+<br>
+
+> Map
+
+```java
+import java.util.HashMap;
+
+HashMap<String, String> map = new HashMap();
+map.put("key", "value");
+map.get("key"); // value 반환
+map.getOrDefault("key", "defaultValue"); // key 존재하면 값 반환, 그렇지 않으면 디폴트 값 반환
+map.containsKey("key"); // True, False 반환
+map.remove("key"); // 삭제, value 반환
+map.size(); // 갯수 
+map.keySet(); // Set 자료형으로 모든 key 반환
+List<String> keyList = new ArrayList<>(map.keySet()); // List 자료형으로 모든 key 반환
+```
+
+HashMap 순서 X
+
+LinkedHashMap 순서 O
+
+TreeMap 오름차순
 
 <br>
 
@@ -367,6 +417,70 @@ public class Main {
 Fitst In First Out
 
 언더플로우, 오버플로우 발생 가능
+
+<br>
+
+> Deque
+
+```java
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Iterator;
+
+// 생성
+Deque<String> dq = new ArrayDeque<>(); 
+Deque<String> dq = new LinkedBlockingDeque<>();
+Deque<String> dq = new ConcurrentLinkedDeque<>();
+Deque<String> dq = new LinkedList<>();
+
+dq.addFirst(str); // 맨 앞에 삽입, 용량 초과시 예외
+dq.push(); // == addFirst(), 용량 초과시 예외
+dq.addLast(str); // 맨 뒤에 삽입
+dq.add(str); // == addLast()
+dq.offerFirst(str); // 맨 앞에 삽입, boolean 리턴
+dq.offerLast(str); // 맨 뒤에 삽입, boolean 리턴
+
+dq.removeFirst(); // 맨 앞 반환하고 삭제, 비어있는 경우 예외
+dq.pop(); // == removeFirst
+dq.remove(); // == removeFirst()
+dq.element(); // == removeFirst()
+dq.removeLast(); // 맨 뒤 반환하고 삭제, 비어있는 경우 예외
+
+dq.pollFirst(); // 맨 앞 반환하고 삭제, 비어있는 경우 null 리턴
+dq.poll(); // == pollFirst()
+dq.pollLast(); // 맨 뒤 반환하고 삭제, 비어있는 경우 null 리턴
+
+dq.getFirst(); // 맨 앞 반환
+dq.getLast(); // 맨 뒤 반환
+dq.peekFirst(); // 맨 앞 반환, 비어있는 경우 null 리턴
+dq.peek(); // == peekFirst()
+dq.peekLast(); // 맨 뒤 반환, 비어있는 경우 null 리턴
+
+dq.removeFirstOccurrence(Object o); // 앞에서부터 탐색하여 o와 동일한 엘리먼트 제거
+dq.remove(Object o); // == removeFirstOccurrence
+dq.removeLastOccurrence(Object o); // 뒤에서부터 탐색하여 o와 동일한 엘리먼트 제거
+
+dq.addAll(Collection c); // 맨 뒤에 Collection 데이터 모두 삽입
+
+dq.contain(Object o); // 덱에 포함되어 있는지 확인
+dq.isEmpty(); // boolean 리턴
+dq.size(); // 엘리먼트 개수
+
+dq.iterator(); // 맨 앞부터 
+dq.descendingIterator(); // 맨 뒤부터
+
+// 순회
+for(String ele : dq) {
+	System.out.println(ele);
+}
+
+Iterator<String> iter = dq.iterator();
+while(iter.hasNext()) {
+	String ele = iterator.next();
+	System.out.println(ele);
+}
+
+```
 
 <br>
 
