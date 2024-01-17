@@ -325,11 +325,15 @@ public class Main {
         Stack<String> s = new Stack<>();
         
         s.push(data); //데이터 삽입
-        s.pop(); //데이터 삭제
+        s.add(data); //데이터 삽입
+        s.pop(); //데이터 삭제 및 반환
+        s.clear(); //데이터 모두 제거, 반환 X
         
         System.out.println(s.peek()); //최근 추가된 데이터 조회
         System.out.println(s.empty()); //empty→true
-       
+        System.out.println(s.contains(data)); //값 존재→true
+        System.out.println(s.containsAll(Arrays.asList(data1,data2,data3))); //값 모두 존재→true
+        System.out.println(s.search(data)); //없음→-1, Top→1, 위에서 몇번째인지 리턴, 여러 개인 경우 제일 위
     }
 }
 ```
