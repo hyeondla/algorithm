@@ -144,6 +144,26 @@ Interger[] arr = new Integer[배열크기];
 Arrays.sort(arr); //오름차순 정렬
 Arrays.sort(arr, Collections.reverseOrder()); //내림차순 정렬
 
+//이차원 배열 정렬1
+int[][] arr = new int[n][2];
+Arrays.sort(arr, (arr1, arr2) -> {
+   if(arr1[0] == arr2[0]) { // [0]값이 같은 경우
+       return arr1[1] - arr2[1]; // [1] 오름차순 정렬
+   } else {
+       return arr1[0] - arr2[0]; // [0] 오름차순 정렬
+   }
+});
+//이차원 배열 정렬2
+Arrys.sort(arr, new Comparator<Integer[]>() {
+   public int compare(Integer[] arr1, Integer[] arr2) {
+       if(arr1[0].equals(arr2[0])) {
+           return arr1[1] - arr2[1];
+       } else {
+           return arr1[0] - arr2[0];
+       }
+   } 
+});
+
 Arrays.fill(arr, data); //일차원 배열 초기화
 System.out.println(Arrays.toString(arr)); //문자열로 리턴
 //이차원 배열 초기화
