@@ -382,6 +382,73 @@ List, Set
 
 <br>
 
+> LinkedList
+
+```java
+import java.util.LinkedList;
+
+public class Main {
+	public static void main(String[] args){
+		
+        LinkedList<String> list = new LinkedList<>();
+        LinkedList<Integer> list = new LinkedList<>(Arrays.asList(1, 2, 3));
+        
+        list.addFirst(data); // 맨 앞에 데이터 추가
+        list.addLast(data); // 맨 뒤에 데이터 추가
+        list.add(data); // 마지막에 데이터 추가, 성공→true
+        list.add(int idx, data); // 특정 위치에 데이터 추가
+        list.addAll(Collection c); // 마지막에 컬렉션 모든 데이터 추가
+        list.addAll(int idx, Collection c); // 특정 위치에 컬렉션 모든 데이터 추가
+        
+        list.removeFirst(data); // 맨 앞 데이터 제거
+        list.removeLast(data); // 맨 뒤 데이터 제거
+        list.remove(); // 맨 앞 데이터 제거
+        list.remove(int idx); // 특정 위치 데이터 제거
+        list.remove(Object obj); // 객체 제거, 성공→true
+        list.removeAll(Collection c); // 컬렉션 모든 데이터 제거
+        list.retainAll(Collection c); // 컬렉션 공통 데이터만 남기고 제거
+        list.clear(); // 모든 데이터 제거
+        
+        System.out.println(list.size()); // 데이터 개수
+        System.out.println(list.isEmpty); // empty→true
+        System.out.println(list.contains(Object obj)); // 객체 포함 확인
+        System.out.println(list.contains(Collection c)); // 컬렉션 모든 데이터 포함 확인
+        System.out.println(list.indexOf(Object obj)); // 객체 위치 확인
+        System.out.println(list.lastIndexOf(Object obj)); // 객체 위치 뒤에서부터 확인
+        
+        list.get(int idx); // 특정 위치 데이터 반환
+        list.subList(int idx1, int idx2); // idx1~idx2 데이터 리스트 반환
+        list.set(int idx, Object obj); // 특정 위치 데이터 변경
+        list.toArray(); // 모든 데이터 배열로 반환
+        
+        // For문 사용
+        for (String data : list) {
+            System.out.println(data);
+        }
+        // Iterator 사용
+        Iterator iter = list.iterator();
+        while(iter.hasNext()) {
+            System.out.println(iter.next());
+        }
+        // ListIterator 사용
+        ListIterator iter = list.listIterator();
+        while(iter.hasNext()) {
+            System.out.println(iter.next());
+        }
+        while(iter.hasPrevious()) {
+            System.out.println(iter.previous());
+        }
+        
+    }
+}
+```
+
+O(1) :  `addFirst()` `addLast()` 
+
+O(N) : `add(idx, data)` `clear()`
+
+<br>
+
 > 스택 Stack
 
 ```java
